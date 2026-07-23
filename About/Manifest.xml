@@ -3,7 +3,7 @@
 <Manifest>
 
   <identifier>Multiplayer</identifier>
-  <manifestUri>https://raw.githubusercontent.com/rwmt/Multiplayer/master/About/Manifest.xml</manifestUri>
-  <downloadUri>https://github.com/rwmt/Multiplayer/releases/latest</downloadUri>
+  <manifestUri>https://raw.githubusercontent.com/eiaol/Multiplayer/master/About/Manifest.xml</manifestUri>
+  <downloadUri>https://github.com/eiaol/Multiplayer/releases/latest</downloadUri>
 
 </Manifest>

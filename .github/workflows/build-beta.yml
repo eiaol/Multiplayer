@@ -2,11 +2,13 @@ name: Build beta
 
 env:
   SLN_PATH: Source/
+  GH_REPO: ${{ github.repository }}
 
 on:
   workflow_dispatch:
   push:
     branches:
+      - master
       - dev
     paths-ignore:
       - 'README.md'
@@ -15,8 +17,10 @@ jobs:
   build:
     name: Build beta
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     env:
-        GH_TOKEN: ${{ github.token }}
+      GH_TOKEN: ${{ github.token }}
     steps:
     - name: Checkout Repository
       uses: actions/checkout@v4
@@ -52,10 +56,10 @@ jobs:
     - name: Clean up last release
       continue-on-error: true
       run: |
-        gh release delete --cleanup-tag --yes "continuous"
+        gh release delete --repo "$GH_REPO" --cleanup-tag --yes "continuous"
     
     - name: Upload new release
       run: |
-        gh release create --target "${{ github.sha }}" --title "Continuous" --notes-file ".github/workflows/alpha-notes.md" --draft "continuous"
-        gh release upload "continuous" Multiplayer-beta.zip
-        gh release edit "continuous" --draft=false
+        gh release create --repo "$GH_REPO" --target "${{ github.sha }}" --title "Continuous" --notes-file ".github/workflows/alpha-notes.md" --draft "continuous"
+        gh release upload --repo "$GH_REPO" "continuous" Multiplayer-beta.zip
+        gh release edit --repo "$GH_REPO" "continuous" --draft=false

@@ -48,7 +48,7 @@ public static class VersionChecker
         var client = new RestClient("https://api.github.com/")
             .AddDefaultHeader("Accept", "application/vnd.github+json")
             .AddDefaultHeader("X-GitHub-Api-Version", "2022-11-28");
-        var req = new RestRequest("repos/rwmt/Multiplayer/releases?per_page=5");
+        var req = new RestRequest("repos/eiaol/Multiplayer/releases?per_page=5");
         var resp = await client.GetAsync<List<Release>>(req);
         return resp.FirstOrDefault(release => release.tag_name == "continuous");
     }
